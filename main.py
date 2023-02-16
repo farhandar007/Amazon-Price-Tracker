@@ -1,13 +1,13 @@
+# please read the instruction provided in readme to avoid any errors
 from bs4 import BeautifulSoup
 import requests
 import smtplib
 
 # using requests
-url = "https://www.amazon.com/dp/B007WQ9YNO/ref=sbl_dpx_kitchen-electric-cookware_B08GC6PL3D_0"
+url = "url of your product"
 headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-    "Accept-Language": "en-US,en;q=0.9"
+    "User-Agent": "you will get this from http://myhttpheader.com/",
+    "Accept-Language": "you will get this from http://myhttpheader.com/"
 }
 response = requests.get(url=url, headers=headers)
 webpage = response.text
@@ -21,10 +21,10 @@ price = float(product.get_text())
 
 
 # sending mail when the price is below  threshold
-my_email = "pythoncode61xd@gmail.com"
+my_email = "your email"
 if price < 40:
     with smtplib.SMTP("smtp.gmail.com", 587) as connection:
         connection.starttls()
-        connection.login(user=my_email, password="viyxkqqbdzjlfwfm")
-        connection.sendmail(from_addr=my_email, to_addrs="frhndar@gmail.com",
+        connection.login(user=my_email, password="your google app password")
+        connection.sendmail(from_addr=my_email, to_addrs="the email on which you want the update",
                             msg=f"Subject:Amazon price alert!\n\n {product_title} is now ${price},\n {url} ")
